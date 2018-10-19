@@ -1,17 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
+
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+
 using System.Web.Mvc;
 
 namespace DotNetMidtermC.Controllers
 {
-    public class HugsController : Controller
+    public class Hugsmodel
     {
-        private HugsModel  db = new HugsModel();
+        public Hugsmodel()
+        {
+        }
+    }
+    public class HugsController : Controller
+       
+    {
+        private Models.Hug  db = new Models.HugsModel();
 
         // GET: Hugs
         public ActionResult Index()
@@ -47,8 +53,12 @@ namespace DotNetMidtermC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HugId,Hugee,HugTypeId,HugDate")] Hug hug)
+        public ActionResult Create([Bind(Include = "HugId,Hugee,HugTypeId,HugDate")] Hugsmodel hugsmodel)
         {
+            if (hugsmodel ==null )
+            {
+                throw new ArgumentNullException(nameof(hugsmodel));
+            }
             if (ModelState.IsValid)
             {
                 db.Hugs.Add(hug);
@@ -81,7 +91,7 @@ namespace DotNetMidtermC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HugId,Hugee,HugTypeId,HugDate")] Hug hug)
+        public ActionResult Edit([Bind(Include = "HugId,Hugee,HugTypeId,HugDate")] Hugsmodel hugsmodel)
         {
             if (ModelState.IsValid)
             {

@@ -8,6 +8,8 @@ namespace DotNetMidtermC.Models
 
     public partial class Hug
     {
+        internal object Hugs;
+
         public int HugId { get; set; }
 
         [Required]
@@ -20,5 +22,10 @@ namespace DotNetMidtermC.Models
         public DateTime HugDate { get; set; }
 
         public virtual HugType HugType { get; set; }
+
+        public static implicit operator Hug(HugsModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
